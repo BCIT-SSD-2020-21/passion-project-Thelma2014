@@ -1,15 +1,16 @@
-import { AmplifyPasswordField } from '@aws-amplify/ui-react';
 import React, { useState } from 'react';
 import Form from "react-bootstrap/Form";
+import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "../style/containers/Login.css";
 import { Auth } from "aws-amplify";
-import { useFormFields } from "../libs/hooksLib";
+import { useAppContext } from "../libs/contextLib";
+import { useFormFields } from "../libs/hookLib";
 
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] =  useState("");
+    const history = useHistory();
+    const { userHasAuthenticated } = useAppContext();
     const [fields, handleFieldChange] = useFormFields({
         email: "",
         password: ""
@@ -22,8 +23,9 @@ export default function Login() {
         event.preventDefault();
 
         try {
-            await Auth.signIn(email, password);
-            alert("Logged in");
+            await Auth.signIn(fields.email, fields.password);
+            userHasAuthenticated(true);
+            history.push("/");
         } catch (e) {
             alert(e.message);
         }
