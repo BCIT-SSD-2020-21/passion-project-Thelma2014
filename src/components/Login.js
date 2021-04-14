@@ -1,14 +1,13 @@
 import { AmplifyPasswordField } from '@aws-amplify/ui-react';
 import React, { useState } from 'react';
-import From from "react-boostrap/Form";
-import { Form } from 'react-bootstrap';
-import Buttton from "react-bootstrap/Button";
-import "./Login.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import "../style/containers/Login.css";
 
 
 export default function Login() {
-    const [email, setEmail] = useEstate("");
-    cosnt [password, setPassword] =  useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] =  useState("");
 
     function validateForm() {
         return email.length > 0 && password.length > 0;
@@ -32,7 +31,7 @@ export default function Login() {
                         />
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
-                    <From.Label>Password</From.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
                     type="password"
                     value={password}
