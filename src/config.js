@@ -1,5 +1,5 @@
 const config = {
-    storage: {
+    s3: {
       REGION: "us-east-1",
       BUCKET: "door-to-door-app-upload",
     },
