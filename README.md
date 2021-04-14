@@ -18,7 +18,7 @@ Students are able to use the tech stack of their choice.
 ### Essential Features
 
 #### Milestone 1
-Conversation Tracking - Tracking the simple out come of a conversations using slips of paper cut from the attached form. Participants will log into the app and either open a profile or just enter their data with the tap of an icon.
+Conversation Tracking - Tracking the simple out come of a conversations. Participants will log into the app and either open a profile or just enter their data with the tap of an icon.
 
 #### Milestone 2
 Testimony Tracking - Tied to the first one, but when participants witness someone that will like to share something during the door to door visits. The app could allow someone to submit images, videos, and text entries and share via WhatsApp.
