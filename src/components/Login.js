@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import "../style/containers/Login.css";
 import { Auth } from "aws-amplify";
+import Form from "react-bootstrap/Form";
+import LoaderButton from "../components/LoaderButton";
+import { useHistory } from "react-router-dom";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hookLib";
-
+import { onError } from "../libs/errorLib";
+import "../style/containers/Login.css";
 
 export default function Login() {
     const history = useHistory();
     const { userHasAuthenticated } = useAppContext();
+	const [isLoading, setIsLoading] = useState(false)
     const [fields, handleFieldChange] = useFormFields({
         email: "",
         password: ""
@@ -22,12 +23,15 @@ export default function Login() {
     async function handleSubmit(event) {
         event.preventDefault();
 
+        setIsLoading(true);
+
         try {
             await Auth.signIn(fields.email, fields.password);
             userHasAuthenticated(true);
             history.push("/");
         } catch (e) {
-            alert(e.message);
+            onError(e);
+            setIsLoading(false);
         }
     }
 
@@ -51,9 +55,15 @@ export default function Login() {
                 onChange={handleFieldChange}
               />
             </Form.Group>
-            <Button block size="lg" type="submit" disabled={!validateForm()}>
-              Login
-            </Button>
+				<LoaderButton
+					block
+					size="lg"
+					type="submit"
+					isLoading={isLoading}
+					disabled={!validateForm()}
+					>
+					Login
+				</LoaderButton>
           </Form>
         </div>
       );
