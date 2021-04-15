@@ -22,13 +22,17 @@ export default function Signup() {
     const { userHAsAuthenticated } = useAppContext();
     const [isLoading, setIsLoading] = useState(false);
 
-    
+
     function validateForm() {
         return (
             fields.email.length > 0 &&
             fields.password.length > 0 &&
             fields.password === fields.confirmPassword
         );
+    }
+
+    function validateConfirmationForm() {
+        return fields.confirmationCode.length > 0;
     }
 
 
