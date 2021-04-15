@@ -22,6 +22,7 @@ export default function Signup() {
     const { userHAsAuthenticated } = useAppContext();
     const [isLoading, setIsLoading] = useState(false);
 
+    
     function validateForm() {
         return (
             fields.email.length > 0 &&
@@ -29,6 +30,8 @@ export default function Signup() {
             fields.password === fields.confirmPassword
         );
     }
+
+
 
 
     return (
