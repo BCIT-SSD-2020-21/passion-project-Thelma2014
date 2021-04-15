@@ -9,6 +9,7 @@ import { useFormFields } from "../libs/hookLib";
 
 
 export default function Login() {
+    const [isLoading, setIsLoading] = useState(false)
     const history = useHistory();
     const { userHasAuthenticated } = useAppContext();
     const [fields, handleFieldChange] = useFormFields({
@@ -22,12 +23,15 @@ export default function Login() {
     async function handleSubmit(event) {
         event.preventDefault();
 
+        setIsLoading(true);
+
         try {
             await Auth.signIn(fields.email, fields.password);
             userHasAuthenticated(true);
             history.push("/");
         } catch (e) {
             alert(e.message);
+            setIsLoading(false);
         }
     }
 
