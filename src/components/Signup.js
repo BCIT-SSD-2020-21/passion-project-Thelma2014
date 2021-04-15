@@ -6,6 +6,7 @@ import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
 import "../style/containers/Signup.css";
+import LoaderButton from '../components/LoaderButton';
 
 
 
@@ -45,12 +46,49 @@ export default function Signup() {
         setIsLoading(false);
     }
 
+    async function handleConfirmationSubmit(event) {
+        event.preventDefault();
 
+        setIsLoading(true);
+    }
 
+    function renderForm() {
+        return (
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="email" size="lg">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        type="email"
+                        value={fields.email}
+                        onChange={handleFieldChange}
+                        />
+                </Form.Group>
+                <Form.Group controlId="confirmPassword" size="lg">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                        type="password" 
+                        onChange={handleFieldChange}
+                        value={fields.confirmPassword}
+                        />
+                </Form.Group>
+                <LoaderButton
+                    block
+                    size="lg"
+                    type="submit"
+                    variant="success"
+                    isLoading={isLoading}
+                    disabled={!validateForm()}
+                >
+                    Signup
+                </LoaderButton>
+            </Form>
+        );
+    }
 
     return (
-        <div>
-            
+        <div className="Signup">
+            {newUser === null ? renderForm() : renderConfirmationForm()}
         </div>
-    )
+    );
 }
