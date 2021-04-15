@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
-import "../style/containers/Login.css";
 import { Auth } from "aws-amplify";
+import Form from "react-bootstrap/Form";
+import LoaderButton from "../components/LoaderButton";
+import { useHistory } from "react-router-dom";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hookLib";
-
+import { onError } from "../libs/errorLib";
+import "../style/containers/Login.css";
 
 export default function Login() {
-    const [isLoading, setIsLoading] = useState(false)
     const history = useHistory();
     const { userHasAuthenticated } = useAppContext();
+	const [isLoading, setIsLoading] = useState(false)
     const [fields, handleFieldChange] = useFormFields({
         email: "",
         password: ""
@@ -30,7 +30,7 @@ export default function Login() {
             userHasAuthenticated(true);
             history.push("/");
         } catch (e) {
-            alert(e.message);
+            onError(e);
             setIsLoading(false);
         }
     }
