@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import LoaderButton from "../components/LoaderButton";
 import "../style/containers/Login.css";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
@@ -55,9 +55,15 @@ export default function Login() {
                 onChange={handleFieldChange}
               />
             </Form.Group>
-            <Button block size="lg" type="submit" disabled={!validateForm()}>
-              Login
-            </Button>
+				<LoaderButton
+					block
+					size="lg"
+					type="submit"
+					isLoading={isLoading}
+					disabled={!validateForm()}
+					>
+					Login
+				</LoaderButton>
           </Form>
         </div>
       );
