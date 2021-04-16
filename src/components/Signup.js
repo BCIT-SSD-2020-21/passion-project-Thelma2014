@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
@@ -6,9 +7,6 @@ import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hookLib";
 import { onError } from "../libs/errorLib";
 import "../style/containers/Signup.css";
-import { Auth } from "aws-amplify";
-
-
 
 export default function Signup() {
     const [fields, handleFieldChange] = useFormFields({
@@ -17,12 +15,10 @@ export default function Signup() {
         confirmPassword: "",
         confirmationCode: "",
     });
-
     const history = useHistory();
     const [newUser, setNewUser] =useState(null);
-    const { userHAsAuthenticated } = useAppContext();
+    const { userHasAuthenticated } = useAppContext();
     const [isLoading, setIsLoading] = useState(false);
-
 
     function validateForm() {
         return (

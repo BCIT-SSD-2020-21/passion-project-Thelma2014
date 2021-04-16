@@ -11,7 +11,7 @@ import "../style/containers/Login.css";
 export default function Login() {
     const history = useHistory();
     const { userHasAuthenticated } = useAppContext();
-	const [isLoading, setIsLoading] = useState(false)
+	  const [isLoading, setIsLoading] = useState(false)
     const [fields, handleFieldChange] = useFormFields({
         email: "",
         password: ""

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Routes from './Routes';
+import { Auth } from "aws-amplify";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
-import { Auth } from "aws-amplify";
 import { onError } from "./libs/errorLib";
+import Routes from './Routes';
 import './App.css';
 
 
@@ -60,7 +60,7 @@ function App() {
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               ) : (
                 <>
-                  <LinkContainer to="/signup">
+                   <LinkContainer to="/signup">
                     <Nav.Link>Signup</Nav.Link>
                   </LinkContainer>
                   <LinkContainer to="/login">
