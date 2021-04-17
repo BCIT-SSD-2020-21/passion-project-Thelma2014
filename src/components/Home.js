@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TrixEditor } from "react-trix";
 import { Link } from "react-router-dom";
 import * as trixLib from "../libs/trixLib";
+import * as commonLib from "../libs/commonLib";
 import "../style/containers/Home.css";
 import "../style/containers/Editor.css";
 export default class Home extends Component {
@@ -19,7 +20,7 @@ export default class Home extends Component {
 
       async componentDidMount() {
         await trixLib.didMount();
-        await common.onboarding();
+        await commonLib.onboarding();
       }
     
       async componentWillUnmount() {
@@ -27,7 +28,7 @@ export default class Home extends Component {
       }
     
       async set_localstorage() {
-        var source_param = await common.getParam("utm_source");
+        var source_param = await commonLib.getParam("utm_source");
         if (source_param === "chrome_extension" || source_param === "firefox_extension") {
           this.setState({
             cache: "current_note_popup"

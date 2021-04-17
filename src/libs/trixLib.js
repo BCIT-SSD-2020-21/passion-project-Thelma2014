@@ -95,6 +95,18 @@ export async function createUploadButton(editor) {
     });
   }
 
+  export async function createDividerButton(editor) {
+    var divider = document.createElement("button");
+    divider.setAttribute("type", "button");
+    divider.setAttribute("class", "trix-button trix-button--icon trix-button--icon-horizontal-rule");
+    divider.setAttribute("data-trix-action", "x-horizontal-rule");
+    divider.setAttribute("title", "Divider");
+    divider.setAttribute("tabindex", "-1");
+    divider.innerText = "Divider";
+  
+    document.querySelector("[data-trix-button-group=block-tools] [data-trix-attribute=quote]").after(divider);
+  }
+
   export async function handleUpload(event) {
     var attachment = event.attachment;
     attachment.attachmentManager.delegate.composition.updateAttributesForAttachment({'caption': '<Caption>'}, attachment);
