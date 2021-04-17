@@ -1,4 +1,4 @@
-const config = {
+export default {
     s3: {
       REGION: "us-east-1",
       BUCKET: "door-to-door-app-upload",
@@ -15,4 +15,3 @@ const config = {
     },
   };
   
-  export default config;
