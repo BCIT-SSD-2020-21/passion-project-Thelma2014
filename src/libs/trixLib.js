@@ -119,6 +119,16 @@ export async function createUploadButton(editor) {
     document.querySelector("[data-trix-button-group=block-tools] [data-trix-attribute=heading1]").after(h2Button);
   }
 
+  export async function handleTrixActions(event) {
+    if (event.actionName === "x-horizontal-rule") {
+      var hr = new trix.Attachment({
+        contentType: "application/horizontal-rule.html",
+        content: "<hr>"
+      });
+      event.target.editor.insertAttachment(hr);
+    }
+  }
+
   export async function handleUpload(event) {
     var attachment = event.attachment;
     attachment.attachmentManager.delegate.composition.updateAttributesForAttachment({'caption': '<Caption>'}, attachment);

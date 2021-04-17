@@ -35,6 +35,43 @@ export default class Home extends Component {
           });
         }
       }
+
+      async prepopulateContent(editor) {
+    // Get content from LocalStorage if present
+    if (window.localStorage) {
+      if (localStorage.getItem(this.state.cache)) {
+        let current_note = JSON.parse(localStorage.getItem(this.state.cache));
+
+        this.setState({
+          title: current_note.title,
+          content: current_note.content
+        });
+
+      }
+    }
+
+    var add_param = await common.getParam("add");
+    if (add_param) {
+      this.setState({
+        content: decodeURIComponent(add_param.replace(/\+/g, '%20'))
+      });
+    }
+
+    var template_param = await common.getParam("template");
+    if (template_param) {
+      try {
+        const note = await API.get("notes", `/notes/${template_param}`);
+        const { title, content } = note;
+        this.setState({
+          note,
+          title,
+          content
+        });        
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
       
       async handleEditorReady(editor) {
         await this.set_localstorage();
