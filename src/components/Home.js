@@ -28,7 +28,30 @@ export default class Home extends Component {
       validateForm() {
         return (this.state.title && this.state.title.length > 0) && (this.state.content && this.state.content.length > 0 && this.state.content !== "<p><br></p>");
       } 
-      
+
+      handleClickNewNote() {
+        if (this.state.title || this.state.content) {
+          if (window.confirm("Are you sure you want to leave this page? Your changes will not be saved.")) {
+            var element = document.querySelector("trix-editor");
+            if (element) {
+              element.editor.loadHTML("");
+            }
+            this.setState({
+              title: "",
+              content: ""
+            });
+            if (window.localStorage) {
+              localStorage.removeItem(this.state.cache);
+            }
+            this.props.history.push("/");
+          } else {
+            return;
+          }
+        } else {
+          this.props.history.push("/");
+        }
+      }
+
       handleSubmit = async event => {
         event.preventDefault();
     
