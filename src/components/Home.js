@@ -24,27 +24,68 @@ export default class Home extends Component {
       async componentWillUnmount() {
         await trixLib.willUnmount();
       } */
-
-
+      
+      validateForm() {
+        return (this.state.title && this.state.title.length > 0) && (this.state.content && this.state.content.length > 0 && this.state.content !== "<p><br></p>");
+      } 
+      
+      handleSubmit = async event => {
+        event.preventDefault();
+    
+        if (this.validateForm()) {
+    
+          this.setState({ isLoading: true });
+    
+          try {
+            var newNote = await this.createNote({
+              title: this.state.title,
+              content: this.state.content
+              //token: await common.makeid()
+            });
+    
+            // Track event on Tag Manager
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              'event': 'new_note'
+            });
+    
+            if (window.localStorage) {
+              let notes = (localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : []);
+              notes.push({
+                id: newNote.noteId,
+                title: newNote.title
+                //token: newNote.token
+              });
+              localStorage.setItem('notes', JSON.stringify(notes));
+              localStorage.removeItem(this.state.cache); // Remove current_note from localstorage
+            }
+    
+            this.props.history.push("/"+newNote.noteId);
+          } catch (e) {
+            alert(e);
+            this.setState({ isLoading: false });
+          }
+        }
+      }
 
     render() {
         return (
           <div className="NewNote">
             <form>
               <div className="title">
-                <input type="text"  placeholder="Title"  />
+                <input type="text"  value={this.state.title} placeholder="Title" onChange={this.ChangeTitle} />
               </div>
               <div className="buttons">
                 <div className="submit">
-                  <span  type="submit" data-hint="Please add a title and a body to your note">Publish</span>
+                  <span  className={`btn ${(!this.validateForm() || this.state.isLoading) ? "disabled" : ""}`} onClick={this.handleSubmit} type="submit" data-hint="Please add a title and a body to your note">Publish</span>
                 </div>
                 <div className="secondary-links-container">
-                  <div className="action new_note hint" data-hint="Create a new note"></div>
+                  <div className="action new_note hint" data-hint="Create a new note" onClick={this.handleClickNewNote.bind(this)}></div>
                   <Link className="action list_notes hint" rel="noopener noreferrer" to={`/mynotes`} data-hint="My notes"></Link>
                 </div>
               </div>
               <div className="body">
-                <TrixEditor placeholder="Your note"/>
+                <TrixEditor autoFocus={true} value={this.state.content} onChange={this.handleChange.bind(this)} placeholder="Your note" onEditorReady={this.handleEditorReady.bind(this)}/>
               </div>
             </form>
           </div>
