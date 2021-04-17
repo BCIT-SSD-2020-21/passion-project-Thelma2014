@@ -2,10 +2,25 @@ import React, { Component } from 'react'
 import { TrixEditor } from "react-trix";
 import { Link } from "react-router-dom";
 import "../style/containers/Home.css";
-
-
+import * as trixLib from "../libs/trixLib";
 
 export default class Home extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          isLoading: null,
+          title: "",
+          content: "",
+          note: null,
+          cache: "current_note"
+        };
+      }
+
+    
+
+
+
     render() {
         return (
           <div className="NewNote">
