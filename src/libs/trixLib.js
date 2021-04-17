@@ -94,3 +94,32 @@ export async function createUploadButton(editor) {
           fileInput.click();
     });
   }
+
+  export async function didMount() {
+    window.addEventListener('trix-attachment-add', handleUpload);
+    window.addEventListener('trix-action-invoke', handleTrixActions);
+  
+    trix.config.blockAttributes.heading2 = {
+      tagName: "h2",
+      terminal: true,
+      breakOnReturn: true,
+      group: false
+    }
+  
+    window.addEventListener('scroll', function(e) {
+      var toolbar  = document.getElementsByTagName("trix-toolbar")[0];
+      var stop = toolbar ? toolbar.getBoundingClientRect().top : 0;
+      if (toolbar) {
+        if (stop <= 0) {
+          toolbar.classList.add("sticky");
+        } else {
+          toolbar.classList.remove("sticky"); 
+        }
+      }
+    });
+  }
+  
+  export async function willUnmount() {
+    window.removeEventListener('trix-attachment-add', handleUpload);
+    window.removeEventListener('trix-action-invoke', handleTrixActions);
+  }

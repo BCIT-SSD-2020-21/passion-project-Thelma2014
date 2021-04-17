@@ -39,6 +39,15 @@ export default class Home extends Component {
         return (this.state.title && this.state.title.length > 0) && (this.state.content && this.state.content.length > 0 && this.state.content !== "<p><br></p>");
       } 
 
+      handleChange = (html, text) => {
+
+        this.setState({
+          content: html
+        });
+    
+        this.updateLocalStorage();
+      }
+
       handleClickNewNote() {
         if (this.state.title || this.state.content) {
           if (window.confirm("Are you sure you want to leave this page? Your changes will not be saved.")) {
