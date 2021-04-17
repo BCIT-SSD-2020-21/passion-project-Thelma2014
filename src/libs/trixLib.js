@@ -95,6 +95,12 @@ export async function createUploadButton(editor) {
     });
   }
 
+  export async function handleUpload(event) {
+    var attachment = event.attachment;
+    attachment.attachmentManager.delegate.composition.updateAttributesForAttachment({'caption': '<Caption>'}, attachment);
+    await s3Upload(attachment);
+  }
+
   export async function didMount() {
     window.addEventListener('trix-attachment-add', handleUpload);
     window.addEventListener('trix-action-invoke', handleTrixActions);

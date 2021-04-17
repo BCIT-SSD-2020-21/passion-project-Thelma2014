@@ -17,13 +17,23 @@ export default class Home extends Component {
         };
       }
 
-/*       async componentDidMount() {
+      async componentDidMount() {
         await trixLib.didMount();
+        await common.onboarding();
       }
-
+    
       async componentWillUnmount() {
         await trixLib.willUnmount();
-      } */
+      }
+    
+      async set_localstorage() {
+        var source_param = await common.getParam("utm_source");
+        if (source_param === "chrome_extension" || source_param === "firefox_extension") {
+          this.setState({
+            cache: "current_note_popup"
+          });
+        }
+      }
       
       async handleEditorReady(editor) {
         await this.set_localstorage();
