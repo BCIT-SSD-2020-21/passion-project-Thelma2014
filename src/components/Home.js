@@ -25,6 +25,16 @@ export default class Home extends Component {
         await trixLib.willUnmount();
       } */
       
+      async handleEditorReady(editor) {
+        await this.set_localstorage();
+        await this.prepopulateContent(editor);
+        extraTrix.createUploadButton(editor);
+        extraTrix.createDividerButton(editor);
+        extraTrix.createHeadingsButtons(editor);
+        extraTrix.createVideoButton(editor);
+        editor.insertHTML(this.state.content);
+      }
+
       validateForm() {
         return (this.state.title && this.state.title.length > 0) && (this.state.content && this.state.content.length > 0 && this.state.content !== "<p><br></p>");
       } 
