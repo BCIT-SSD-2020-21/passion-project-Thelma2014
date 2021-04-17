@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { API } from "aws-amplify";
 import { TrixEditor } from "react-trix";
 import { Link } from "react-router-dom";
 import * as trixLib from "../libs/trixLib";
@@ -156,6 +157,12 @@ export default class Home extends Component {
             this.setState({ isLoading: false });
           }
         }
+      }
+
+      createNote(note) {
+        return API.post("notes", "/notes", {
+          body: note
+        });
       }
 
     render() {
