@@ -17,7 +17,13 @@ export default class Home extends Component {
         };
       }
 
-    
+      async componentDidMount() {
+        await trixLib.didMount();
+      }
+
+      async componentWillUnmount() {
+        await trixLib.willUnmount();
+      }
 
 
 
