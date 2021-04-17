@@ -107,6 +107,18 @@ export async function createUploadButton(editor) {
     document.querySelector("[data-trix-button-group=block-tools] [data-trix-attribute=quote]").after(divider);
   }
 
+  export async function createHeadingsButtons(editor) {
+    var h2Button = document.createElement("button");
+    h2Button.setAttribute("type", "button");
+    h2Button.setAttribute("class", "trix-button trix-button--icon-heading-2");
+    h2Button.setAttribute("data-trix-attribute", "heading2");
+    h2Button.setAttribute("title", "Sub Heading");
+    h2Button.setAttribute("tabindex", "-1");
+    h2Button.innerText = "H2";
+  
+    document.querySelector("[data-trix-button-group=block-tools] [data-trix-attribute=heading1]").after(h2Button);
+  }
+
   export async function handleUpload(event) {
     var attachment = event.attachment;
     attachment.attachmentManager.delegate.composition.updateAttributesForAttachment({'caption': '<Caption>'}, attachment);
