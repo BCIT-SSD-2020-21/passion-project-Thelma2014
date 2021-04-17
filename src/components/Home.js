@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { TrixEditor } from "react-trix";
 import { Link } from "react-router-dom";
-import "../style/containers/Home.css";
 import * as trixLib from "../libs/trixLib";
-
+import "../style/containers/Home.css";
+import "../style/containers/Editor.css";
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -17,13 +17,13 @@ export default class Home extends Component {
         };
       }
 
-      async componentDidMount() {
+/*       async componentDidMount() {
         await trixLib.didMount();
       }
 
       async componentWillUnmount() {
         await trixLib.willUnmount();
-      }
+      } */
 
 
 
