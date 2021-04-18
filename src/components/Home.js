@@ -87,7 +87,7 @@ export default class Home extends Component {
       validateForm() {
         return (this.state.title && this.state.title.length > 0) && (this.state.content && this.state.content.length > 0 && this.state.content !== "<p><br></p>");
       } 
-      
+
       ChangeTitle = event => {
         this.setState({
           title: event.target.value
@@ -125,6 +125,12 @@ export default class Home extends Component {
           }
         } else {
           this.props.history.push("/");
+        }
+      }
+
+      updateLocalStorage() {
+        if (window.localStorage) {
+          localStorage.setItem(this.state.cache, JSON.stringify({title: this.state.title, content: this.state.content}));
         }
       }
 
