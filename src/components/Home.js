@@ -145,7 +145,7 @@ export default class Home extends Component {
             var newNote = await this.createNote({
               title: this.state.title,
               content: this.state.content,
-              token: await common.makeid()
+              token: await commonLib.makeid()
             });
     
             // Track event on Tag Manager
