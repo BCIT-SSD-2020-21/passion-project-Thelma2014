@@ -21,7 +21,7 @@ export default class Home extends Component {
 
       async componentDidMount() {
         await trixLib.didMount();
-        await commonLib.onboarding();
+        //await commonLib.onboarding();
       }
     
       async componentWillUnmount() {
@@ -51,14 +51,14 @@ export default class Home extends Component {
       }
     }
 
-    var add_param = await common.getParam("add");
+    var add_param = await commonLib.getParam("add");
     if (add_param) {
       this.setState({
         content: decodeURIComponent(add_param.replace(/\+/g, '%20'))
       });
     }
 
-    var template_param = await common.getParam("template");
+    var template_param = await commonLib.getParam("template");
     if (template_param) {
       try {
         const note = await API.get("notes", `/notes/${template_param}`);
@@ -77,16 +77,24 @@ export default class Home extends Component {
       async handleEditorReady(editor) {
         await this.set_localstorage();
         await this.prepopulateContent(editor);
-        extraTrix.createUploadButton(editor);
-        extraTrix.createDividerButton(editor);
-        extraTrix.createHeadingsButtons(editor);
-        extraTrix.createVideoButton(editor);
+        trixLib.createUploadButton(editor);
+        trixLib.createDividerButton(editor);
+        trixLib.createHeadingsButtons(editor);
+        trixLib.createVideoButton(editor);
         editor.insertHTML(this.state.content);
       }
 
       validateForm() {
         return (this.state.title && this.state.title.length > 0) && (this.state.content && this.state.content.length > 0 && this.state.content !== "<p><br></p>");
       } 
+      
+      ChangeTitle = event => {
+        this.setState({
+          title: event.target.value
+        });
+    
+        this.updateLocalStorage();
+      }
 
       handleChange = (html, text) => {
 
@@ -130,8 +138,8 @@ export default class Home extends Component {
           try {
             var newNote = await this.createNote({
               title: this.state.title,
-              content: this.state.content
-              //token: await common.makeid()
+              content: this.state.content,
+              token: await common.makeid()
             });
     
             // Track event on Tag Manager
@@ -144,8 +152,8 @@ export default class Home extends Component {
               let notes = (localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : []);
               notes.push({
                 id: newNote.noteId,
-                title: newNote.title
-                //token: newNote.token
+                title: newNote.title,
+                token: newNote.token
               });
               localStorage.setItem('notes', JSON.stringify(notes));
               localStorage.removeItem(this.state.cache); // Remove current_note from localstorage
