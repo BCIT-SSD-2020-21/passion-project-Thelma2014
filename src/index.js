@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import Amplify from "aws-amplify";
-import { BrowserRouter as Router } from 'react-router-dom';
 import config from "./config";
+import './index.css';
 
 Amplify.configure({
   Auth: {
@@ -15,8 +15,8 @@ Amplify.configure({
     userPoolWebClientId: config.cognito.APP_CLIENT_ID
   },
   Storage: {
-    region: config.s3.REGION,
-    bucket: config.s3.BUCKET,
+    region: config.storage.REGION,
+    bucket: config.storage.BUCKET,
     identityPoolId: config.cognito.IDENTITY_POOL_ID
   },
   API: {
