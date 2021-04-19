@@ -1,4 +1,5 @@
 export default {
+
   apiGateway: {
     REGION: "us-east-1",
     URL: "https://j2j36kmec1.execute-api.us-east-1.amazonaws.com/prod",
