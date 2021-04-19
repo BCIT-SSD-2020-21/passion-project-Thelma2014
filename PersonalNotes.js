@@ -16,6 +16,18 @@ export default class PersonalNotes extends Component {
         };
       }
 
+      componentWillMount() {
+        if (window.localStorage) {
+          const notes = (localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')).reverse() : []); 
+    
+          this.setState({
+            notes: notes,
+            original_notes: notes
+          })
+        }
+      }
+
+
     render() {
         return (
             <div className="Notes">
