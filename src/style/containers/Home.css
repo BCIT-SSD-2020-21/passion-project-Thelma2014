@@ -8,3 +8,69 @@
     font-family: monospace,CustomSerif,Georgia,Cambria,'Times New Roman',serif !important;
     font-weight: 600;
   }
+
+  .NewNote form {
+    position: relative;
+  }
+  
+  .NewNote .title, .NewNote .body {
+    display: block;
+    white-space: pre-wrap;
+    margin: 10px 0 12px;
+  }
+  
+  .NewNote .title {
+    padding-left: 0;
+    width: 100%;
+  }
+  
+  .NewNote .title input {
+    font-size: 31px;
+    line-height: 32px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -1px;
+    -webkit-transition: .3s background-color ease;
+    -o-transition: .3s background-color ease;
+    transition: .3s background-color ease;
+  }
+  
+  .ql-editor {
+    padding: 0 !important;
+    overflow-y: visible !important; 
+  }
+  
+  .NewNote .body textarea, .ql-container {
+    word-wrap: break-word;
+    width: 100%;
+    font-size: 100% !important;
+    font-family: monospace,CustomSerif,Georgia,Cambria,'Times New Roman',serif !important;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  
+  .ql-editor h2 {
+    font-weight: 400;
+  }
+  
+  .ql-video {
+    width: 100%;
+    height: 189px;
+  }
+  
+  @media only screen and (min-width: 1024px) {
+  
+    .NewNote .submit:active {
+      top: 2px;
+    }
+  
+    .NewNote .title {
+      padding-left: 0.6em;
+    }
+  
+    .ql-video {
+      width: 100%;
+      height: 389px;
+    }
+  
+  }
