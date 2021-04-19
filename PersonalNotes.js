@@ -49,6 +49,28 @@ export default class PersonalNotes extends Component {
 
 
     render() {
+        
+        let content;
+				if (this.state.original_notes.length > 0) {
+					content = (
+						<div>
+							<input type="text" placeholder="Search notes..." className="search_notes" value={this.state.search_term} onChange={this.handleSearch} />
+							<ul className="mynotes nolist">
+								{this.state.notes.map((note) =>
+									<li key={note.id}>
+										<div className="remove_note action hint" data-hint="Remove note" onClick={this.handleClickRemove.bind(this)} data-note={note.id}></div>
+										<Link to={`/${note.id}`}>{note.title}</Link>
+									</li> 
+								)}
+							</ul>
+						</div>
+					)
+				} else {
+					content = (
+						<p>You haven't created any note yet. <Link to="/">Create a note now</Link></p>
+					)
+				}
+
         return (
             <div className="Notes">
             <div className="title">
