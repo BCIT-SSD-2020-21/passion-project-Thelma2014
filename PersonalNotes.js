@@ -27,6 +27,25 @@ export default class PersonalNotes extends Component {
         }
       }
 
+			handleClickRemove(event) {
+				if (window.confirm("Are you sure you want to remove this note from your list?\n\nAs a reminder, the note will NOT be deleted but simply removed from your list. You can always add it back by clicking on the \"Add to my notes\" button on the note page.")) {
+					if (window.localStorage) {
+						let notes = (localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : []);
+						let cached_note_index = notes.findIndex(x => x.id === event.target.getAttribute("data-note"));
+		
+		
+						if (cached_note_index > -1) {
+							notes.splice( cached_note_index, 1 );
+							localStorage.setItem('notes', JSON.stringify(notes));
+							this.setState({
+								notes: notes,
+								original_notes: notes
+							})
+						}
+					}
+				}
+			}
+
       handleSearch = event => {
         const searchTerm = event.target.value;
     
