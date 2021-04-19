@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link } from "react-router-dom" ;
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import "../style/containers/Notes.css"
 
 
 export default class PersonalNotes extends Component {
