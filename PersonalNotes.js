@@ -27,6 +27,26 @@ export default class PersonalNotes extends Component {
         }
       }
 
+      handleSearch = event => {
+        const searchTerm = event.target.value;
+    
+        if (searchTerm.length > 0) {
+          let filtered_notes = this.state.original_notes.filter(note =>
+            note.title.toLowerCase().includes(searchTerm)
+          );
+    
+          this.setState({
+            notes: filtered_notes,
+            search_term: searchTerm
+          });
+        } else {
+          this.setState({
+            search_term: '',
+            notes: this.state.original_notes
+          })
+        }
+      }
+
 
     render() {
         return (
