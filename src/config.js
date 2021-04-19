@@ -1,8 +1,4 @@
 export default {
-  keys: {
-    ACCESS: "AKIA6LSG3RNKDGIHFXRW",
-    SECRET: "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"
-  },
   apiGateway: {
     REGION: "us-east-1",
     URL: "https://j2j36kmec1.execute-api.us-east-1.amazonaws.com/prod",
