@@ -72,3 +72,35 @@
     color: #f8f8f2;
     overflow: visible;
   }
+
+  .Notes .body ol, .Notes .body ul {
+    margin-bottom: 1.7em;
+    padding-left: 3em;
+  }
+  
+  .Notes .body ol li, .Notes .body ul li {
+    margin-bottom: 0.2em;
+  }
+  
+  /*.Notes .body ol li {
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    counter-increment: list-0;
+  }*/
+  
+  /*.Notes .body ul:not(.nolist) li:before {
+    display: inline-block;
+    white-space: nowrap;
+    width: 1.2em;
+    margin-left: -1.5em;
+    margin-right: 0.3em;
+    text-align: right;
+  }
+  
+  .Notes .body ul:not(.nolist) li:before {
+    content: counter(list-0, decimal) '. ';
+  }
+  
+  .Notes .body ul:not(.nolist) > li:before {
+    content: '\2022';
+  }*/
+  
