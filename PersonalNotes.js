@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
 import {Link } from "react-router-dom" ;
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+
+
 export default class PersonalNotes extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          original_notes: [],
+          notes: [],
+          search_term: '',
+          show_sync_modal: false,
+          note_ids: ''
+        };
+      }
+
     render() {
         return (
             <div className="Notes">
